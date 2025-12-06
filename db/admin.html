@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix नेपाल Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/cards.css">
+    <link rel="stylesheet" href="./css/views.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <img src="./css/assets/fixnepal-logo.png" alt="Fix Nepal" class="sidebar-logo">
+                <h2>Fix नेपाल</h2>
+                <p>Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin.html" class="sidebar-link active">
+                    <span class="sidebar-icon"></span>
+                    Dashboard
+                </a>
+                <a href="#manage-requests" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Manage Requests
+                </a>
+                <a href="#team" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Team
+                </a>
+                <a href="photo-upload.html" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Photo Upload (Soon)
+                </a>
+            </nav>
+        </aside>
+
+        <div class="app-container">
+            <header class="app-header">
+                <div class="logo">
+                    <h1>Fix नेपाल</h1>
+                    <p>Administrator Panel</p>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li class="active" data-section="overview"><button type="button">Overview</button></li>
+                        <li data-section="analytics"><button type="button">Analytics</button></li>
+                        <li data-section="settings"><button type="button">Settings</button></li>
+                        <li><a href="photo-upload.html">Photo Upload</a></li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <span class="user-name">Admin</span>
+                    <button class="logout-btn" type="button" onclick="confirmLogout('index1.html')">Logout</button>
+                </div>
+            </header>
+
+            <section class="admin-hero" data-section-target="overview">
+                <div>
+                    <p class="hero-label">Namaste, Admin 👋</p>
+                    <h2>Let’s keep Kathmandu moving smoothly today.</h2>
+                    <p class="hero-sub">You have live visibility into field teams and citizen requests below. Review the latest updates or jump straight into analytics.</p>
+                    <div class="hero-actions">
+                        <button class="admin-btn" data-section="manage-requests" onclick="document.getElementById('manage-requests').scrollIntoView({behavior:'smooth'})">Review queue</button>
+                        <button class="ghost-btn" data-section="team" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Ping a team</button>
+                    </div>
+                </div>
+            </section>
+
+            <main class="main-content">
+                <section class="admin-grid" data-section-target="overview">
+                    <div class="admin-card">
+                        <span class="metric-label">Open Requests</span>
+                        <strong class="metric-value" id="metric-open">0</strong>
+                        <div class="metric-sub">+5 new today</div>
+                    </div>
+                   
+                    <div class="admin-card">
+                        <span class="metric-label">Field Teams</span>
+                        <strong class="metric-value" id="metric-teams">3</strong>
+                        <div class="metric-sub">2 active deployments</div>
+                    </div>
+                    <div class="admin-card">
+                        <span class="metric-label">Avg. Resolution</span>
+                        <strong class="metric-value" id="metric-time">0h</strong>
+                        <div class="metric-sub">Target &lt; 12h</div>
+                    </div>
+                </section>
+
+                <section class="admin-section admin-analytics hidden" data-section-target="analytics">
+                    <div class="section-header">
+                        <h2>Analytics</h2>
+                    </div>
+                    <div class="analytics-grid">
+                        <div class="chart-card">
+                            <h3>Status Breakdown</h3>
+                            <div class="chart-bar-list" id="status-chart"></div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Weekly Volume</h3>
+                            <div class="sparkline" id="volume-chart"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="admin-section" id="manage-requests" data-section-target="overview">
+                    <div class="section-header">
+                        <h2>Manage Requests</h2>
+                        <div class="view-toggle">
+                            <button class="admin-btn filter-btn active" data-filter="all">All</button>
+                            <button class="admin-btn filter-btn" data-filter="pending">Pending</button>
+                            <button class="admin-btn filter-btn" data-filter="completed">Completed</button>
+                        </div>
+                    </div>
+                    <p class="section-note">These are the latest citizen submissions. Approve when a field team is assigned, or mark completed once the work is verified.</p>
+                    <div class="admin-table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Description</th>
+                                    <th>Submitted</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-request-rows">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="admin-section" id="team" data-section-target="overview">
+                    <div class="section-header">
+                        <h2>Team Alerts</h2>
+                        <button class="admin-btn" id="add-member-btn">Add Member</button>
+                    </div>
+                    <p class="section-note">Keep your rapid-response contacts neatly listed. Everyone added here appears in incident assignments.</p>
+                    <div class="admin-card">
+                        <ul class="team-list" id="team-list"></ul>
+                    </div>
+                </section>
+
+                <section class="admin-section hidden" data-section-target="settings" id="settings">
+                    <div class="section-header">
+                        <h2>Panel Settings</h2>
+                    </div>
+                    <form class="settings-form">
+                        <label>
+                            Notification Email
+                            <input type="email" placeholder="alerts@fixnepal.gov.np">
+                        </label>
+                        <label>
+                            Auto-assign Threshold (hrs)
+                            <input type="number" min="1" value="12">
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                            Enable SMS escalation
+                        </label>
+                        <button type="button" class="admin-btn">Save Settings</button>
+                    </form>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="admin-modal hidden" id="member-modal">
+        <div class="admin-modal-content">
+            <h3>Add Response Member</h3>
+            <form id="member-form">
+                <label>
+                    Full Name
+                    <input type="text" id="member-name" required>
+                </label>
+                <label>
+                    Role
+                    <input type="text" id="member-role" required>
+                </label>
+                <label>
+                    Contact
+                    <input type="text" id="member-contact" required>
+                </label>
+                <div class="modal-actions">
+                    <button type="button" class="admin-action danger" id="member-cancel">Cancel</button>
+                    <button type="submit" class="admin-btn">Add Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-toast" id="admin-toast" aria-live="polite"></div>
+
+    <script src="./js/logout.js" defer></script>
+    <script src="./js/admin.js"></script>
+</body>
+</html>
