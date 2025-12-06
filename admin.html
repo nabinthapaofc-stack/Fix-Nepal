@@ -31,6 +31,10 @@
                     <span class="sidebar-icon"></span>
                     Team
                 </a>
+                <a href="photo-upload.html" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Photo Upload (Soon)
+                </a>
             </nav>
         </aside>
 
@@ -45,6 +49,7 @@
                         <li class="active" data-section="overview"><button type="button">Overview</button></li>
                         <li data-section="analytics"><button type="button">Analytics</button></li>
                         <li data-section="settings"><button type="button">Settings</button></li>
+                        <li><a href="photo-upload.html">Photo Upload</a></li>
                     </ul>
                 </nav>
                 <div class="user-info">
@@ -53,6 +58,18 @@
                 </div>
             </header>
 
+            <section class="admin-hero" data-section-target="overview">
+                <div>
+                    <p class="hero-label">Namaste, Admin 👋</p>
+                    <h2>Let’s keep Kathmandu moving smoothly today.</h2>
+                    <p class="hero-sub">You have live visibility into field teams and citizen requests below. Review the latest updates or jump straight into analytics.</p>
+                    <div class="hero-actions">
+                        <button class="admin-btn" data-section="manage-requests" onclick="document.getElementById('manage-requests').scrollIntoView({behavior:'smooth'})">Review queue</button>
+                        <button class="ghost-btn" data-section="team" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Ping a team</button>
+                    </div>
+                </div>
+            </section>
+
             <main class="main-content">
                 <section class="admin-grid" data-section-target="overview">
                     <div class="admin-card">
@@ -60,11 +77,7 @@
                         <strong class="metric-value" id="metric-open">0</strong>
                         <div class="metric-sub">+5 new today</div>
                     </div>
-                    <div class="admin-card">
-                        <span class="metric-label">Completed</span>
-                        <strong class="metric-value" id="metric-completed">0</strong>
-                        <div class="metric-sub">78% SLA met</div>
-                    </div>
+                   
                     <div class="admin-card">
                         <span class="metric-label">Field Teams</span>
                         <strong class="metric-value" id="metric-teams">3</strong>
@@ -102,6 +115,7 @@
                             <button class="admin-btn filter-btn" data-filter="completed">Completed</button>
                         </div>
                     </div>
+                    <p class="section-note">These are the latest citizen submissions. Approve when a field team is assigned, or mark completed once the work is verified.</p>
                     <div class="admin-table-wrapper">
                         <table class="admin-table">
                             <thead>
@@ -124,6 +138,7 @@
                         <h2>Team Alerts</h2>
                         <button class="admin-btn" id="add-member-btn">Add Member</button>
                     </div>
+                    <p class="section-note">Keep your rapid-response contacts neatly listed. Everyone added here appears in incident assignments.</p>
                     <div class="admin-card">
                         <ul class="team-list" id="team-list"></ul>
                     </div>
@@ -176,6 +191,8 @@
             </form>
         </div>
     </div>
+
+    <div class="admin-toast" id="admin-toast" aria-live="polite"></div>
 
     <script src="./js/logout.js" defer></script>
     <script src="./js/admin.js"></script>

@@ -85,6 +85,75 @@ body {
     color: #e63946;
 }
 
+.admin-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 12, 24, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 200;
+    transition: opacity 0.25s ease;
+}
+
+.admin-modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.admin-modal-content {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    width: min(420px, 90vw);
+    box-shadow: 0 24px 60px rgba(4, 12, 24, 0.25);
+}
+
+.admin-modal-content form label {
+    display: block;
+    font-weight: 600;
+    color: #0f2652;
+    margin-top: 14px;
+}
+
+.admin-modal-content form input {
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(15, 30, 84, 0.2);
+    font-size: 0.95rem;
+}
+
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.admin-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0f6bd7;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    box-shadow: 0 14px 26px rgba(15, 30, 84, 0.22);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 210;
+}
+
+.admin-toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @media (max-width: 768px) {
     .admin-section {
         padding: 20px;
