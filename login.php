@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $dbHost = '127.0.0.1';
 $dbUser = 'root';
 $dbPass = '';
-$dbName = 'pothole';
+$dbName = 'fixnepal';
 
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
