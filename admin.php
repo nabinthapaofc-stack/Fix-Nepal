@@ -2,7 +2,6 @@
 require_once __DIR__ . '/db/db.php';
 session_start();
 
-// require admin
 if (empty($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     http_response_code(403);
     echo 'Access denied. <a href="index.html">Login</a>';
@@ -11,7 +10,7 @@ if (empty($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
 $mysqli = db_connect();
 
-// handle resolve action (GET is fine for internal admin UI)
+
 if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'resolve') {
     $id = (int) $_GET['id'];
     $u = $mysqli->prepare('UPDATE issues SET status = ? WHERE id = ?');
@@ -23,7 +22,6 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'resolve') {
     exit;
 }
 
-// fetch issues
 $res = $mysqli->query('SELECT id, user_id, email, title, description, location, status, created_at FROM issues ORDER BY created_at DESC');
 ?>
 <!doctype html>
