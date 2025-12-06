@@ -54,6 +54,26 @@
     color: #666;
 }
 
+.requests-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e63946;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.requests-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(230, 57, 70, 0.3);
+}
+
 .status-badge {
     padding: 4px 8px;
     border-radius: 12px;
