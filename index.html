@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fix Nepal - Citizen Dashboard</title>
-   
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/cards.css">
+    <link rel="stylesheet" href="./css/views.css">
+   
   
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
-    <link rel="stylesheet" href="./css/requests.css">
+   
 </head>
 <body>
     <div class="app-container">
@@ -34,14 +38,17 @@
             <section class="issues-section" id="all-issues">
                 <div class="section-header">
                     <h2>Reported Issues</h2>
+                    <div class="view-toggle">
+                      
+
+                    </div>
                 </div>
                 
                 <div class="issues-list">
-                   
                     <div class="issue-card">
                         <div class="issue-header">
                             <h3 class="issue-title">Big pothole near school</h3>
-                            <span class="status-badge status-pending">Pending</span>
+                            <span class="status-badge status-completed">Completed</span>
                         </div>
                         <div class="issue-details">
                             <p class="issue-date">
@@ -57,20 +64,74 @@
 
                     <div class="issue-card">
                         <div class="issue-header">
-                            <h3 class="issue-title">Broken street light</h3>
-                            <span class="status-badge status-in-progress">In Progress</span>
+                            <h3 class="issue-title">Electricity power outage</h3>
+                            <span class="status-badge status-pending">Pending</span>
                         </div>
                         <div class="issue-details">
                             <p class="issue-date">
                                 <span class="detail-label">Reported:</span>
-                                <span class="detail-value">Dec 5, 2025 at 3:45 PM</span>
+                                <span class="detail-value">Dec 6, 2025 at 11:56 AM</span>
                             </p>
                             <p class="issue-location">
                                 <span class="detail-label">Location:</span>
-                                <span class="detail-value">Main Road, Patan</span>
+                                <span class="detail-value">Near XYZ Housing, Kathmandu</span>
                             </p>
                         </div>
                     </div>
                 </div>
+      
+                <div class="issues-table" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Issue</th>
+                                <th>Status</th>
+                                <th>Reported On</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="issue-title">Big pothole near school</td>
+                                <td><span class="status-badge status-completed">Completed</span></td>
+                                <td>Dec 6, 2025 at 11:30 AM</td>
+                                <td>Near ABC School, Kathmandu</td>
+                            </tr>
+                            <tr>
+                                <td class="issue-title">Broken street light</td>
+                                <td><span class="status-badge status-in-progress">In Progress</span></td>
+                                <td>Dec 5, 2025 at 3:45 PM</td>
+                                <td>Main Road, Patan</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </main>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              
+                const viewOptions = document.querySelectorAll('.view-option');
+                const cardView = document.querySelector('.issues-list');
+                const tableView = document.querySelector('.issues-table');
+
+                viewOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                      
+                        viewOptions.forEach(opt => opt.classList.remove('active'));
+                       
+                        this.classList.add('active');
+
+                        
+                        if (this.dataset.view === 'card') {
+                            cardView.style.display = 'block';
+                            tableView.style.display = 'none';
+                        } else {
+                            cardView.style.display = 'none';
+                            tableView.style.display = 'block';
+                        }
+                    });
+                });
+            });
+        </script>
