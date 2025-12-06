@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$insert->execute([$username, $full_name, $email, $hash, $role]);
 
 	header('Content-Type: application/json');
-	echo json_encode(['ok' => true, 'redirect' => 'index.html']);
+	echo json_encode(['ok' => true, 'redirect' => 'index1.html']);
 	exit;
 }
 
