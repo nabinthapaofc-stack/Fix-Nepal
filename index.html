@@ -3,19 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FixNepal</title>
+    <title>Fixनेपाल</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             background: white;
         }
+        .top-logo {
+            text-align: right;
+            padding: 20px 50px;
+        }
+        .top-logo img {
+            max-width: 250px;
+            height: auto;
+        }
         nav {
             background: #1e40af;
             padding: 20px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             border-radius: 50px;
             margin: 20px;
+            color: white;
+            gap: 20px;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-right {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-right button {
+            background: white;
+            color: #1e40af;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .nav-right button:hover {
+            background: #e0e7ff;
+        }
+        nav img {
+            max-width: 50px;
+            height: auto;
+        }
+        nav span {
+            font-size: 24px;
+            font-weight: bold;
             color: white;
         }
         .hero {
@@ -86,16 +128,93 @@
             color: #4b5563;
             line-height: 1.6;
         }
+        .about-section {
+            display: flex;
+            padding: 50px;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .about-content {
+            flex: 1;
+        }
+        .about-photo {
+            flex: 0 0 300px;
+        }
+        .about-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .features-section {
+            padding: 50px;
+            background: #f8f9fa;
+        }
+        .features-section h1 {
+            text-align: center;
+            color: #1e40af;
+        }
+        .features-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .features-left-photo {
+            flex: 0 0 250px;
+        }
+        .features-left-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(30, 64, 175, 0.15);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            flex: 1;
+        }
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.12);
+            border: none;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(30, 64, 175, 0.18);
+        }
+        .features-right-photo {
+            flex: 0 0 250px;
+        }
+        .features-right-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(30, 64, 175, 0.15);
+        }
     </style>
 </head>
 <body>
-    <nav>Fixनेपाल</nav>
+    <nav>
+        <div class="nav-left">
+            <img src="logo.png" alt="FixNepal">
+            <span>Fixनेपाल</span>
+        </div>
+        <div class="nav-right">
+            <button onclick="window.location.href='signup.html'">Sign Up</button>
+            <button onclick="window.location.href='login.html'">Login</button>
+        </div>
+    </nav>
+
     <div class="hero">
         <div class="hero-left">
-            <h1>FixNepal</h1>
+            <h1>Fixनेपाल</h1>
             <p>Fix the Streets, Save Lives</p>
-           
-            <button onclick="window.location.href='login.html'">Login</button>
         </div>
     </div>
     <div class="about-section" style="padding: 50px;">
@@ -111,7 +230,7 @@
             </div>
         </div>
         <h1>About Us</h1>
-        <p>FixNepal is a civic-tech platform built to expose and fix the problems that slow Nepal down. Potholes, blocked roads, delayed ambulances, broken infrastructure. These issues cost lives every single day. We’re here to kill the excuses and bring real visibility to what’s broken.<br>
+        <p>Fixनेपाल is a civic-tech platform built to expose and fix the problems that slow Nepal down. Potholes, blocked roads, delayed ambulances, broken infrastructure. These issues cost lives every single day. We’re here to kill the excuses and bring real visibility to what’s broken.<br>
 
 Our job is simple:<br>
 You report. Authorities see it. Action gets taken faster.<br>
@@ -131,24 +250,18 @@ We're that push.</p>
             </div>
 
             <div class="feature-card">
-                <h3> Request Ambulance Support</h3>
+                <h3> Request Pothole Ambulance Support</h3>
                 <p>When you need an ambulance, every second counts. FixNepal shares your exact location instantly, reducing the "Where are you?" confusion that wastes precious minutes. Faster location = faster rescue.</p>
             </div>
 
-            <div class="feature-card">
-                <h3> Flag Road Hazards</h3>
-                <p>Open manholes, broken streetlights, fallen trees, landslides, slippery roads — all these things risk lives. You report them, and we map them publicly so they can't be ignored.</p>
-            </div>
+            
 
             <div class="feature-card">
                 <h3> Track Issue Status</h3>
                 <p>No more complaints disappearing into thin air. Every report has a timeline: submitted, viewed, assigned, and resolved. You always know what's happening, who's handling it, and whether the job is actually done.</p>
             </div>
 
-            <div class="feature-card">
-                <h3> Build Pressure With Transparency</h3>
-                <p>When reports are public, negligence gets exposed. FixNepal creates pressure by showing the real condition of our streets in one place. The more people report, the harder it becomes for problems to be ignored.</p>
-            </div>
+        
         </div>
     </div>
 </body>
