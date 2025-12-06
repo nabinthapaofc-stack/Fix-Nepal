@@ -9,6 +9,36 @@
             font-family: Arial, sans-serif;
             margin: 0;
             background: white;
+            color: #000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-mode .theme-toggle {
+            background: #ffc107;
+            color: #000;
         }
         .top-logo {
             text-align: right;
@@ -61,9 +91,33 @@
             color: white;
         }
         .hero {
+            text-align: center;
+            padding: 30px 50px 80px 50px;
+            background: white;
+            min-height: 50vh;
             display: flex;
-            padding: 50px;
-            gap: 40px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        body.dark-mode .hero {
+            background: #2a2a2a;
+        }
+        .hero h1 {
+            color: #1e40af;
+            font-size: 120px;
+            margin: 20px 0 10px 0;
+            text-shadow: 0 0 30px rgba(30, 64, 175, 0.4);
+            line-height: 1.2;
+        }
+        .hero .tagline {
+            color: #000;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        body.dark-mode .hero .tagline {
+            color: #fff;
         }
         .hero-left {
             flex: 1;
@@ -145,9 +199,47 @@
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
         }
-        .about-section {
+        .about-wrapper {
             display: flex;
             padding: 50px;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .about-content {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+        .about-content:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .about-content p {
+            color: #4b5563;
+            line-height: 1.8;
+            font-size: 16px;
+            margin: 0;
+        }
+        .about-section {
+            padding: 0;
+        }
+        .about-section h1 {
+            color: #1e40af;
+            font-size: 40px;
+            margin: 0;
+            padding: 50px 50px 20px 50px;
+        }
+        .about-photo {
+            flex: 0 0 300px;
+        }
+        .about-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
             gap: 40px;
             align-items: flex-start;
         }
@@ -229,41 +321,36 @@
     </nav>
 
     <div class="hero">
-        <div class="hero-left">
-            <h1>Fixनेपाल</h1>
-            <p>Fix the Streets, Save Lives</p>
-        </div>
+        <h1>Fixनेपाल</h1>
+        <p class="tagline">Fix the Streets, Save Lives</p>
     </div>
-    <div class="about-section" style="padding: 50px;">
-        <div class="photo-collage">
-            <div class="photo-box">
-                <img src="photo1.jpg" alt="About FixNepal">
-            </div>
-            <div class="photo-box">
-                <img src="photo2.jpg" alt="Our Mission">
-            </div>
-            <div class="photo-box">
-                <img src="photo3.jpg" alt="Community Impact">
-            </div>
-        </div>
+    
+    <div class="about-section">
         <h1>About Us</h1>
-        <p>Fixनेपाल is a civic-tech platform built to expose and fix the problems that slow Nepal down. Potholes, blocked roads, delayed ambulances, broken infrastructure. These issues cost lives every single day. We’re here to kill the excuses and bring real visibility to what’s broken.<br>
+        <div class="about-wrapper">
+            <div class="about-content">
+                <p>Fixनेपाल is a civic-tech platform built to expose and fix the problems that slow Nepal down. Potholes, blocked roads, delayed ambulances, broken infrastructure. These issues cost lives every single day. We're here to kill the excuses and bring real visibility to what's broken.<br><br>
 
 Our job is simple:<br>
-You report. Authorities see it. Action gets taken faster.<br>
+You report. Authorities see it. Action gets taken faster.<br><br>
 
-We combine real-time reporting, location tracking, and community-driven data to make Nepal’s streets safer and more reliable. No politics, no drama just problems and solutions.<br>
+We combine real-time reporting, location tracking, and community-driven data to make Nepal's streets safer and more reliable. No politics, no drama just problems and solutions.<br><br>
 
-FixNepal exists because the system won’t improve unless someone pushes it.<br>
+FixNepal exists because the system won't improve unless someone pushes it.<br>
 We're that push.</p>
+            </div>
+            <div class="about-photo">
+                <img src="photo1.jpg" alt="About FixNepal">
+            </div>
+        </div>
     </div>
 
     <div class="features-section">
         <h1 style="color: #1e40af; text-align: center;">What We Do?</h1>
         <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-content">
-                    <h3>📍 Report Potholes</h3>
+            <div class="feature-item">
+                <div class="feature-card">
+                    <h3> Report Potholes</h3>
                     <p>Bad roads destroy cars, delay ambulances, and cause crashes. We let you drop a pin, upload photos, and submit the report in seconds. Authorities get accurate data instead of vague complaints, so repairs actually happen.</p>
                 </div>
                 <div class="feature-image">
@@ -271,9 +358,9 @@ We're that push.</p>
                 </div>
             </div>
 
-            <div class="feature-card reverse">
-                <div class="feature-content">
-                    <h3>🚑 Request Ambulance Support</h3>
+            <div class="feature-item reverse">
+                <div class="feature-card">
+                    <h3> Request Pothole Ambulance Support</h3>
                     <p>When you need an ambulance, every second counts. FixNepal shares your exact location instantly, reducing the "Where are you?" confusion that wastes precious minutes. Faster location = faster rescue.</p>
                 </div>
                 <div class="feature-image">
@@ -281,16 +368,10 @@ We're that push.</p>
                 </div>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-content">
-                    <h3>⚠️ Flag Road Hazards</h3>
-                    <p>Open manholes, broken streetlights, fallen trees, landslides, slippery roads — all these things risk lives. You report them, and we map them publicly so they can't be ignored.</p>
-                </div>
-            </div>
-
-            <div class="feature-card reverse">
-                <div class="feature-content">
-                    <h3>📊 Track Issue Status</h3>
+         
+            <div class="feature-item reverse">
+                <div class="feature-card">
+                    <h3> Track Issue Status</h3>
                     <p>No more complaints disappearing into thin air. Every report has a timeline: submitted, viewed, assigned, and resolved. You always know what's happening, who's handling it, and whether the job is actually done.</p>
                 </div>
                 <div class="feature-image">
@@ -298,17 +379,33 @@ We're that push.</p>
                 </div>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-content">
-                    <h3>💪 Build Pressure With Transparency</h3>
-                    <p>When reports are public, negligence gets exposed. FixNepal creates pressure by showing the real condition of our streets in one place. The more people report, the harder it becomes for problems to be ignored.</p>
-                </div>
-            </div>
         </div>
     </div>
+
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+
+    <script>
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('themeToggle').textContent = '☀️';
+        }
+
+        function toggleTheme() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (isDarkMode) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        }
+    </script>
 </body>
-
-
     </div>
 
   
