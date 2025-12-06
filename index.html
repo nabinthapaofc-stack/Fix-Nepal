@@ -39,6 +39,27 @@
             margin: 5px;
             cursor: pointer;
         }
+        .photo-collage {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .photo-box {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .photo-box:hover {
+            transform: scale(1.05);
+        }
+        .photo-box img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -51,8 +72,28 @@
             <button>Login</button>
         </div>
     </div>
-    <div class="hero-left">
-    <h1>About Us</h1>
+    <div class="about-section" style="padding: 50px;">
+        <div class="photo-collage">
+            <div class="photo-box">
+                <img src="photo1.jpg" alt="About FixNepal">
+            </div>
+            <div class="photo-box">
+                <img src="photo2.jpg" alt="Our Mission">
+            </div>
+            <div class="photo-box">
+                <img src="photo3.jpg" alt="Community Impact">
+            </div>
+        </div>
+        <h1>About Us</h1>
+        <p>FixNepal is a civic-tech platform built to expose and fix the problems that slow Nepal down. Potholes, blocked roads, delayed ambulances, broken infrastructure. These issues cost lives every single day. We’re here to kill the excuses and bring real visibility to what’s broken.<br>
+
+Our job is simple:<br>
+You report. Authorities see it. Action gets taken faster.<br>
+
+We combine real-time reporting, location tracking, and community-driven data to make Nepal’s streets safer and more reliable. No politics, no drama just problems and solutions.<br>
+
+FixNepal exists because the system won’t improve unless someone pushes it.<br>
+We’re that push.</p>
     </div>
 </body>
 </html>
