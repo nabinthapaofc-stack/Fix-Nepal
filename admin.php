@@ -1,75 +1,47 @@
 <?php
-require_once __DIR__ . '/db/db.php';
 session_start();
+require_once __DIR__ . '/db.php';
 
-// require admin
-if (empty($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    http_response_code(403);
-    echo 'Access denied. <a href="index.html">Login</a>';
+// Auth check: must be logged in and admin
+if (empty($_SESSION['admin_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
+    header('Content-Type: application/json');
+    echo json_encode(['ok' => false, 'error' => 'Access denied', 'redirect' => 'index.html']);
     exit;
 }
 
-$mysqli = db_connect();
+// Fetch admin info
+$adminId = (int) $_SESSION['admin_id'];
+$stmt = $pdo->prepare('SELECT id, admin_name, full_name, email, phone_number, created_at FROM admins_reg WHERE id = ? LIMIT 1');
+$stmt->execute([$adminId]);
+$admin = $stmt->fetch();
 
-// handle resolve action (GET is fine for internal admin UI)
-if (isset($_GET['action'], $_GET['id']) && $_GET['action'] === 'resolve') {
-    $id = (int) $_GET['id'];
-    $u = $mysqli->prepare('UPDATE issues SET status = ? WHERE id = ?');
-    $status = 'resolved';
-    $u->bind_param('si', $status, $id);
-    $u->execute();
-    $u->close();
-    header('Location: admin.php');
-    exit;
-}
+// Example: fetch all users for admin panel
+$stmt = $pdo->query('SELECT id, username, full_name, email, role, created_at FROM users_reg ORDER BY created_at DESC');
+$users = $stmt->fetchAll();
 
-// fetch issues
-$res = $mysqli->query('SELECT id, user_id, email, title, description, location, status, created_at FROM issues ORDER BY created_at DESC');
+// Optionally fetch reports
+$stmt = $pdo->query('SELECT * FROM dash_report ORDER BY date_of_report DESC');
+$reports = $stmt->fetchAll();
+
+// Render admin interface using $admin, $users, $reports
 ?>
 <!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Admin - Issues</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
+<html><head><meta charset="utf-8"><title>Admin</title></head>
 <body>
   <h1>Admin Dashboard</h1>
-  <p>Welcome admin ID: <?php echo htmlspecialchars($_SESSION['user_id'] ?? ''); ?></p>
-
-  <h2>Reported issues</h2>
-
-  <?php if ($res && $res->num_rows > 0): ?>
-    <table border="1" cellpadding="6" cellspacing="0">
-      <tr>
-        <th>ID</th><th>Title</th><th>Description</th><th>Location</th><th>Reporter</th><th>Status</th><th>When</th><th>Action</th>
-      </tr>
-      <?php while ($row = $res->fetch_assoc()): ?>
-        <tr>
-          <td><?php echo (int)$row['id']; ?></td>
-          <td><?php echo htmlspecialchars($row['title']); ?></td>
-          <td style="max-width:400px"><?php echo nl2br(htmlspecialchars($row['description'])); ?></td>
-          <td><?php echo htmlspecialchars($row['location']); ?></td>
-          <td><?php echo htmlspecialchars($row['email'] ?: 'UID:' . (int)$row['user_id']); ?></td>
-          <td><?php echo htmlspecialchars($row['status']); ?></td>
-          <td><?php echo htmlspecialchars($row['created_at']); ?></td>
-          <td>
-            <?php if ($row['status'] === 'open'): ?>
-              <a href="admin.php?action=resolve&id=<?php echo (int)$row['id']; ?>" onclick="return confirm('Mark this issue resolved?')">Resolve</a>
-            <?php else: ?>
-              —
-            <?php endif; ?>
-          </td>
-        </tr>
-      <?php endwhile; ?>
-    </table>
-  <?php else: ?>
-    <p>No reported issues.</p>
-  <?php endif; ?>
-
+  <p>Welcome admin ID: <?php echo htmlspecialchars($_SESSION['user_id']); ?></p>
   <p><a href="logout.php">Logout</a></p>
-</body>
-</html>
-<?php
-$mysqli->close();
-?>
+  <ul>
+    <?php foreach ($users as $user): ?>
+      <li><?php echo htmlspecialchars($user['name']); ?> (<?php echo htmlspecialchars($user['email']); ?>) - <?php echo htmlspecialchars($user['role']); ?></li>
+    <?php endforeach; ?>
+  </ul>
+  <h2>Admin Info</h2>
+  <p><?php echo htmlspecialchars($admin['admin_name']); ?> - <?php echo htmlspecialchars($admin['full_name']); ?> - <?php echo htmlspecialchars($admin['email']); ?> - <?php echo htmlspecialchars($admin['phone_number']); ?> - <?php echo htmlspecialchars($admin['created_at']); ?></p>
+  <h2>Reports</h2>
+  <ul>
+    <?php foreach ($reports as $report): ?>
+      <li><?php echo htmlspecialchars($report['report_name']); ?> - <?php echo htmlspecialchars($report['date_of_report']); ?></li>
+    <?php endforeach; ?>
+  </ul>
+</body></html>

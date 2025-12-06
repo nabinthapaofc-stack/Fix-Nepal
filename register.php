@@ -1,46 +1,47 @@
 <?php
 
 session_start();
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); exit; }
+require_once __DIR__ . '/db.php';
 
-$dbHost = '127.0.0.1';
-$dbUser = 'root';
-$dbPass = '';
-$dbName = 'pothole';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$username = trim($_POST['username'] ?? '');
+	$full_name = trim($_POST['full_name'] ?? '');
+	$email = trim($_POST['email'] ?? '');
+	$password = $_POST['password'] ?? '';
+	$confirm = $_POST['confirm_password'] ?? '';
 
-$email = trim($_POST['email'] ?? '');
-$password = $_POST['password'] ?? '';
-$role = 'user';
+	$errors = [];
+	if ($username === '') $errors[] = 'Username is required';
+	if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Valid email is required';
+	if ($password === '') $errors[] = 'Password is required';
+	if ($password !== $confirm) $errors[] = 'Passwords do not match';
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 6) {
-    header('Content-Type: application/json');
-    echo json_encode(['ok' => false, 'error' => 'Invalid input']);
-    exit;
+	if ($errors) {
+		$resp = ['ok' => false, 'error' => implode('; ', $errors)];
+		header('Content-Type: application/json');
+		echo json_encode($resp);
+		exit;
+	}
+
+	// Check duplicates
+	$stmt = $pdo->prepare('SELECT id FROM users_reg WHERE username = ? OR email = ? LIMIT 1');
+	$stmt->execute([$username, $email]);
+	if ($stmt->fetch()) {
+		header('Content-Type: application/json');
+		echo json_encode(['ok' => false, 'error' => 'Username or email already registered']);
+		exit;
+	}
+
+	$hash = password_hash($password, PASSWORD_DEFAULT);
+	$insert = $pdo->prepare('INSERT INTO users_reg (username, full_name, email, password, role, created_at) VALUES (?, ?, ?, ?, ?, NOW())');
+	$role = 'user';
+	$insert->execute([$username, $full_name, $email, $hash, $role]);
+
+	header('Content-Type: application/json');
+	echo json_encode(['ok' => true, 'redirect' => 'index.html']);
+	exit;
 }
-
-$mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-if ($mysqli->connect_error) { header('Content-Type: application/json'); echo json_encode(['ok'=>false,'error'=>'DB']); exit; }
-
-$stmt = $mysqli->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
-$stmt->bind_param('s', $email);
-$stmt->execute();
-$stmt->store_result();
-if ($stmt->num_rows > 0) {
-    $stmt->close();
-    $mysqli->close();
-    header('Content-Type: application/json');
-    echo json_encode(['ok' => false, 'error' => 'Email already exists']);
-    exit;
-}
-$stmt->close();
-
-$hash = password_hash($password, PASSWORD_DEFAULT);
-$stmt = $mysqli->prepare('INSERT INTO users (email, password_hash, role) VALUES (?, ?, ?)');
-$stmt->bind_param('sss', $email, $hash, $role);
-$ok = $stmt->execute();
-$stmt->close();
-$mysqli->close();
 
 header('Content-Type: application/json');
-echo json_encode(['ok' => $ok]);
+echo json_encode(['ok' => true]);
 ?>
