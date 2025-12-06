@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Nepal Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/cards.css">
+    <link rel="stylesheet" href="./css/views.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <img src="./css/assets/fixnepal-logo.png" alt="Fix Nepal" class="sidebar-logo">
+                <h2>Fix Nepal</h2>
+                <p>Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin.html" class="sidebar-link active">
+                    <span class="sidebar-icon"></span>
+                    Dashboard
+                </a>
+                <a href="#manage-requests" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Manage Requests
+                </a>
+                <a href="#team" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Team
+                </a>
+            </nav>
+        </aside>
+
+        <div class="app-container">
+            <header class="app-header">
+                <div class="logo">
+                    <h1>Fix Nepal</h1>
+                    <p>Administrator Panel</p>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li class="active"><a href="admin.html">Overview</a></li>
+                        <li><a href="#analytics">Analytics</a></li>
+                        <li><a href="#settings">Settings</a></li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <span class="user-name">Admin</span>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <section class="admin-grid" id="analytics">
+                    <div class="admin-card">Placeholder for metrics</div>
+                    <div class="admin-card">Placeholder for charts</div>
+                    <div class="admin-card">Placeholder for SLA</div>
+                    <div class="admin-card">Placeholder for workload</div>
+                </section>
+
+                <section class="admin-section" id="manage-requests">
+                    <div class="section-header">
+                        <h2>Manage Requests</h2>
+                        <div class="view-toggle">
+                            <button class="admin-btn" data-filter="all">All</button>
+                            <button class="admin-btn" data-filter="pending">Pending</button>
+                            <button class="admin-btn" data-filter="completed">Completed</button>
+                        </div>
+                    </div>
+                    <div class="admin-table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Reporter</th>
+                                    <th>Submitted</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-request-rows">
+                                <tr>
+                                    <td>Water Leakage - New Baneshwor</td>
+                                    <td><span class="status-badge status-in-progress">Reviewing</span></td>
+                                    <td>नागरिक</td>
+                                    <td>Dec 6, 2025</td>
+                                    <td>
+                                        <button class="admin-action">Approve</button>
+                                        <button class="admin-action danger">Reject</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="admin-section" id="team">
+                    <div class="section-header">
+                        <h2>Team Alerts</h2>
+                        <button class="admin-btn">Add Member</button>
+                    </div>
+                    <div class="admin-card">Placeholder for team management</div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="./js/admin.js"></script>
+</body>
+</html>
