@@ -6,6 +6,38 @@
     margin-top: 20px;
 }
 
+.report-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2d9d5b;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(45, 157, 91, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(45, 157, 91, 0.3);
+}
+
+.report-button .plus-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    font-weight: 700;
+}
+
 .issue-card {
     background: rgb(221, 211, 197);
     border-radius: 8px;
