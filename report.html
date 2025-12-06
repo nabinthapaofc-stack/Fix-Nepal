@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Report an Issue — Fix Nepal</title>
+  <style>
+    :root{--accent:#ef4444;--bg:#f7fafc;--panel:#ffffff;--muted:#6b7280}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:var(--bg); color:#111}
+    header{padding:1rem 1.25rem; background:#fff; box-shadow:0 1px 0 rgba(0,0,0,.04)}
+    .wrap{max-width:900px; margin:28px auto; padding:0 1rem}
+    h1{margin:0 0 8px; font-size:1.25rem}
+    p.lead{margin:0 0 18px; color:var(--muted)}
+
+    /* Reports list */
+    #reports{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+    .report-card{background:var(--panel); padding:12px; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .report-card h3{margin:0 0 6px; font-size:1rem}
+    .report-card p{margin:0; color:var(--muted); font-size:.9rem}
+    .report-meta{margin-top:8px; font-size:.8rem; color:var(--muted)}
+
+    /* Floating button */
+    .report-btn{position:fixed; right:20px; bottom:20px; z-index:60; width:56px; height:56px; border-radius:999px; background:var(--accent); display:flex; align-items:center; justify-content:center; color:white; box-shadow:0 8px 20px rgba(14,23,34,.2); cursor:pointer; border:0}
+    .report-btn:focus{outline:3px solid rgba(239,68,68,.18)}
+
+    /* Slide-out panel */
+    .report-panel{position:fixed; right:0; top:0; height:100%; width:340px; max-width:92%; background:var(--panel); box-shadow:-20px 0 40px rgba(2,6,23,.12); transform:translateX(110%); transition:transform .28s ease; z-index:70; padding:20px; display:flex; flex-direction:column}
+    .report-panel.open{transform:translateX(0)}
+    .report-panel h2{margin:0 0 10px}
+    .report-panel label{display:block; margin-top:10px; font-size:.85rem; color:var(--muted)}
+    .report-panel input, .report-panel textarea{width:100%; padding:8px 10px; margin-top:6px; border-radius:6px; border:1px solid #e6e9ee; font-size:.95rem}
+    .report-panel textarea{min-height:100px; resize:vertical}
+    .panel-actions{display:flex; gap:8px; margin-top:12px}
+    .btn{padding:8px 12px; border-radius:8px; border:0; cursor:pointer}
+    .btn.primary{background:var(--accent); color:#fff}
+    .btn.ghost{background:#f3f4f6}
+
+    /* small responsive tweak */
+    @media (max-width:520px){ .report-panel{width:100%} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <strong>Fix Nepal</strong>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Reports</h1>
+    <p class="lead">Use the button at the bottom-right to open the report form and add a new request.</p>
+
+    <section id="reports" aria-live="polite">
+      <!-- new reports will be appended here -->
+    </section>
+  </main>
+
+  <!-- Floating report button -->
+  <button class="report-btn" id="openReport" title="Report an issue" aria-label="Report an issue">
+    <!-- plus icon -->
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- Slide-out panel -->
+  <aside class="report-panel" id="panel" aria-hidden="true">
+    <h2>Report an issue</h2>
+    <form id="reportForm">
+      <label for="title">Title</label>
+      <input id="title" name="title" placeholder="Short summary" required />
+
+      <label for="desc">Description</label>
+      <textarea id="desc" name="description" placeholder="Describe the issue or request" required></textarea>
+
+      <div class="panel-actions">
+        <button type="submit" class="btn primary">Create</button>
+        <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+      </div>
+    </form>
+  </aside>
+
+  <script>
+    const openBtn = document.getElementById('openReport');
+    const panel = document.getElementById('panel');
+    const form = document.getElementById('reportForm');
+    const reports = document.getElementById('reports');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    function openPanel(){ panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); document.getElementById('title').focus(); }
+    function closePanel(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); }
+
+    openBtn.addEventListener('click', () => {
+      if(panel.classList.contains('open')) closePanel(); else openPanel();
+    });
+
+    cancelBtn.addEventListener('click', (e)=>{ e.preventDefault(); closePanel(); });
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const title = form.title.value.trim();
+      const desc = form.description.value.trim();
+      if(!title) return;
+
+      // Create a new report card in the DOM
+      const card = document.createElement('article');
+      card.className = 'report-card';
+      const h = document.createElement('h3'); h.textContent = title;
+      const p = document.createElement('p'); p.textContent = desc;
+      const meta = document.createElement('div'); meta.className = 'report-meta';
+      const now = new Date(); meta.textContent = now.toLocaleString();
+      card.appendChild(h); card.appendChild(p); card.appendChild(meta);
+      reports.prepend(card);
+
+      // Clear form and close panel
+      form.reset();
+      closePanel();
+
+      // Optional: send the report to a server endpoint
+      // fetch('/api/reports', { method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({title,description:desc,createdAt:now.toISOString()}) }).catch(()=>{});
+    });
+
+    // Close the panel on Escape
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && panel.classList.contains('open')) closePanel(); });
+  </script>
+</body>
+</html>
