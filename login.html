@@ -49,27 +49,15 @@
 <body>
     <div class="login-box">
         <h2>FixNepal Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-         
-        <button onclick="handleLogin()">Login</button>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Username">
+            <input type="email" id="email" name="email" placeholder="Email">
+            <input type="password" id="password" name="password" placeholder="Password">
+            <button type="submit">Login</button>
+        </form>
+        <p class="login-message" id="loginMessage" role="alert"></p>
         <div class="signup-link">Don't have an account? <a href="signup.html">Sign Up</a></div>
     </div>
-
-    <script>
-        function handleLogin() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            
-            if (email && password) {
-                
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Please fill in all fields');
-            }
-        }
-    </script>
+    <script src="./js/login.js" defer></script>
 </body>
 </html>

@@ -54,8 +54,27 @@ body {
 .user-info {
     font-weight: 600;
     color: #10458c;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
+.logout-btn {
+    background: transparent;
+    border: 1px solid rgba(15,76,129,0.4);
+    color: #0f4c81;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border .2s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(15,76,129,0.08);
+    border-color: rgba(15,76,129,0.8);
+    color: #093155;
+}
 .main-content {
     margin-top: 32px;
 }
