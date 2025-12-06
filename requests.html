@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Requests - Fix Nepal</title>
+    
+   
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="./css/cards.css">
+    <link rel="stylesheet" href="./css/views.css">
+    <style>
+        .requests-container {
+                display: flex;
+                gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .requests-section, .history-section {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .request-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .request-item:last-child {
+            border-bottom: none;
+        }
+        
+        .request-title {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .request-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .no-requests {
+            color: #666;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .requests-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <h1>Fix Nepal</h1>
+                <p>My Requests</p>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">All Issues</a></li>
+                    <li class="active">My Requests</li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span class="user-name">नागरिक</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="requests-container">
+             
+                <section class="requests-section">
+                    <h2 class="section-title">Active Requests</h2>
+                    <div id="active-requests">
+                        
+                        <div class="request-item">
+                            <h3 class="request-title">Garbage Collection in Baneshwor</h3>
+                            <div class="request-meta">
+                                <span>Today, 10:30 AM</span>
+                                <span class="status-badge status-pending">In Review</span>
+                            </div>
+                        </div>
+                        <div class="request-item">
+                            <h3 class="request-title">Street Light Repair - Ratna Park</h3>
+                            <div class="request-meta">
+                                <span>Yesterday, 3:45 PM</span>
+                                <span class="status-badge status-in-progress">In Progress</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+               
+                <section class="history-section">
+                    <h2 class="section-title">Request History</h2>
+                    <div id="request-history">
+                      
+                        <div class="request-item">
+                            <h3 class="request-title">Water Leakage - New Baneshwor</h3>
+                            <div class="request-meta">
+                                <span>Dec 1, 2025</span>
+                                <span class="status-badge status-completed">Resolved</span>
+                            </div>
+                        </div>
+                        <div class="request-item">
+                            <h3 class="request-title">Illegal Parking - Thamel Area</h3>
+                            <div class="request-meta">
+                                <span>Nov 28, 2025</span>
+                                <span class="status-badge status-completed">Resolved</span>
+                            </div>
+                        </div>
+                        <div class="request-item">
+                            <h3 class="request-title">Public Park Maintenance - Durbarmarg</h3>
+                            <div class="request-meta">
+                                <span>Nov 25, 2025</span>
+                                <span class="status-badge status-completed">Resolved</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            
+        });
+    </script>
+</body>
+</html>
