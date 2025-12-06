@@ -1,0 +1,28 @@
+:root{--accent:#ef4444;--bg:#f7fafc;--panel:#ffffff;--muted:#6b7280}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:var(--bg); color:#111}
+header{padding:1rem 1.25rem; background:#fff; box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.wrap{max-width:900px; margin:28px auto; padding:0 1rem}
+h1{margin:0 0 8px; font-size:1.25rem}
+p.lead{margin:0 0 18px; color:var(--muted)}
+
+#reports{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+.report-card{background:var(--panel); padding:12px; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.report-card h3{margin:0 0 6px; font-size:1rem}
+.report-card p{margin:0; color:var(--muted); font-size:.9rem}
+.report-meta{margin-top:8px; font-size:.8rem; color:var(--muted)}
+
+.report-btn{position:fixed; right:20px; bottom:20px; z-index:60; width:56px; height:56px; border-radius:999px; background:var(--accent); display:flex; align-items:center; justify-content:center; color:white; box-shadow:0 8px 20px rgba(14,23,34,.2); cursor:pointer; border:0}
+.report-btn:focus{outline:3px solid rgba(239,68,68,.18)}
+
+.report-panel{position:fixed; right:0; top:0; height:100%; width:340px; max-width:92%; background:var(--panel); box-shadow:-20px 0 40px rgba(2,6,23,.12); transform:translateX(110%); transition:transform .28s ease; z-index:70; padding:20px; display:flex; flex-direction:column}
+.report-panel.open{transform:translateX(0)}
+.report-panel h2{margin:0 0 10px}
+.report-panel label{display:block; margin-top:10px; font-size:.85rem; color:var(--muted)}
+.report-panel input, .report-panel textarea{width:100%; padding:8px 10px; margin-top:6px; border-radius:6px; border:1px solid #e6e9ee; font-size:.95rem}
+.report-panel textarea{min-height:100px; resize:vertical}
+.panel-actions{display:flex; gap:8px; margin-top:12px}
+.btn{padding:8px 12px; border-radius:8px; border:0; cursor:pointer}
+.btn.primary{background:var(--accent); color:#fff}
+.btn.ghost{background:#f3f4f6}
+
+@media (max-width:520px){ .report-panel{width:100%} }
