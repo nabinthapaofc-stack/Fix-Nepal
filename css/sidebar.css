@@ -1,0 +1,57 @@
+.app-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    background: #f7f7fb;
+}
+
+.sidebar {
+    background: #192734;
+    color: #fff;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.sidebar-brand h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.sidebar-brand p {
+    margin: 4px 0 0;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-link.active,
+.sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.sidebar-icon {
+    font-size: 18px;
+}
+
+.app-container {
+    padding: 32px;
+}

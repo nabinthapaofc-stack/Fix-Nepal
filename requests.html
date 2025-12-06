@@ -11,6 +11,7 @@
     
     <link rel="stylesheet" href="./css/cards.css">
     <link rel="stylesheet" href="./css/views.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
     <style>
         .requests-container {
                 display: flex;
@@ -69,77 +70,95 @@
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <header class="app-header">
-            <div class="logo">
-                <h1>Fix Nepal</h1>
-                <p>My Requests</p>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fix Nepal</h2>
+                <p>Citizen Hub</p>
             </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html">All Issues</a></li>
-                    <li class="active">My Requests</li>
-                </ul>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Dashboard
+                </a>
+                <a href="requests.html" class="sidebar-link active">
+                    <span class="sidebar-icon"></span>
+                    Requests
+                </a>
+                <a href "report.html" class="sidebar-link">
+                    <span class="sidebar-icon"></span>
+                    Report Issue
+                </a>
             </nav>
-            <div class="user-info">
-                <span class="user-name">नागरिक</span>
-            </div>
-        </header>
+        </aside>
+        <div class="app-container">
+            <header class="app-header">
+                <div class="logo">
+                    <h1>Fix Nepal</h1>
+                    <p>My Requests</p>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">All Issues</a></li>
+                        <li class="active">My Requests</li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <span class="user-name">नागरिक</span>
+                </div>
+            </header>
 
-        <main class="main-content">
-            <div class="requests-container">
-             
-                <section class="requests-section">
-                    <h2 class="section-title">Active Requests</h2>
-                    <div id="active-requests">
-                        
-                        <div class="request-item">
-                            <h3 class="request-title">Garbage Collection in Baneshwor</h3>
-                            <div class="request-meta">
-                                <span>Today, 10:30 AM</span>
-                                <span class="status-badge status-pending">In Review</span>
+            <main class="main-content">
+                <div class="requests-container">
+                    <section class="requests-section">
+                        <h2 class="section-title">Active Requests</h2>
+                        <div id="active-requests">
+                            <div class="request-item">
+                                <h3 class="request-title">Garbage Collection in Baneshwor</h3>
+                                <div class="request-meta">
+                                    <span>Today, 10:30 AM</span>
+                                    <span class="status-badge status-pending">In Review</span>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <h3 class="request-title">Street Light Repair - Ratna Park</h3>
+                                <div class="request-meta">
+                                    <span>Yesterday, 3:45 PM</span>
+                                    <span class="status-badge status-in-progress">In Progress</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="request-item">
-                            <h3 class="request-title">Street Light Repair - Ratna Park</h3>
-                            <div class="request-meta">
-                                <span>Yesterday, 3:45 PM</span>
-                                <span class="status-badge status-in-progress">In Progress</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                    </section>
 
-               
-                <section class="history-section">
-                    <h2 class="section-title">Request History</h2>
-                    <div id="request-history">
-                      
-                        <div class="request-item">
-                            <h3 class="request-title">Water Leakage - New Baneshwor</h3>
-                            <div class="request-meta">
-                                <span>Dec 1, 2025</span>
-                                <span class="status-badge status-completed">Resolved</span>
+                    <section class="history-section">
+                        <h2 class="section-title">Request History</h2>
+                        <div id="request-history">
+                            <div class="request-item">
+                                <h3 class="request-title">Water Leakage - New Baneshwor</h3>
+                                <div class="request-meta">
+                                    <span>Dec 1, 2025</span>
+                                    <span class="status-badge status-completed">Resolved</span>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <h3 class="request-title">Illegal Parking - Thamel Area</h3>
+                                <div class="request-meta">
+                                    <span>Nov 28, 2025</span>
+                                    <span class="status-badge status-completed">Resolved</span>
+                                </div>
+                            </div>
+                            <div class="request-item">
+                                <h3 class="request-title">Public Park Maintenance - Durbarmarg</h3>
+                                <div class="request-meta">
+                                    <span>Nov 25, 2025</span>
+                                    <span class="status-badge status-completed">Resolved</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="request-item">
-                            <h3 class="request-title">Illegal Parking - Thamel Area</h3>
-                            <div class="request-meta">
-                                <span>Nov 28, 2025</span>
-                                <span class="status-badge status-completed">Resolved</span>
-                            </div>
-                        </div>
-                        <div class="request-item">
-                            <h3 class="request-title">Public Park Maintenance - Durbarmarg</h3>
-                            <div class="request-meta">
-                                <span>Nov 25, 2025</span>
-                                <span class="status-badge status-completed">Resolved</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </main>
+                    </section>
+                </div>
+            </main>
+        </div>
     </div>
 
     <script>
