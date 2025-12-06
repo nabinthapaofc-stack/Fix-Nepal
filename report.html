@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Report an Issue — Fix Nepal</title>
+  <link rel="stylesheet" href="./css/cards.css">
+  <link rel="stylesheet" href="./css/views.css">
+  <link rel="stylesheet" href="./css/sidebar.css">
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="./css/assets/fixnepal-logo.png" alt="Fix Nepal" class="sidebar-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="sidebar-link">
+          <span class="sidebar-icon"></span>
+          Dashboard
+        </a>
+        <a href="requests.html" class="sidebar-link">
+          <span class="sidebar-icon"></span>
+          Requests
+        </a>
+        <a href="report.html" class="sidebar-link active">
+          <span class="sidebar-icon"></span>
+          Report Issue
+        </a>
+      </nav>
+    </aside>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="logo">
+          <h1>Fix Nepal</h1>
+          <p>Report Issue</p>
+        </div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">All Issues</a></li>
+            <li><a href="requests.html">My Requests</a></li>
+            <li class="active"><a href="report.html">Report Issue</a></li>
+          </ul>
+        </nav>
+        <div class="user-info">
+          <span class="user-name">नागरिक</span>
+        </div>
+      </header>
+
+      <main class="wrap">
+        <h1>Reports</h1>
+        <p class="lead">Use the button at the bottom-right to open the report form and add a new request.</p>
+
+        <section id="reports" aria-live="polite">
+         
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <button class="report-btn" id="openReport" title="Report an issue" aria-label="Report an issue">
+    
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+ 
+  <aside class="report-panel" id="panel" aria-hidden="true">
+    <h2>Report an issue</h2>
+    <form id="reportForm">
+      <label for="title">Title</label>
+      <input id="title" name="title" placeholder="Short summary" required />
+
+      <label for="desc">Description</label>
+      <textarea id="desc" name="description" placeholder="Describe the issue or request" required></textarea>
+
+      <div class="panel-actions">
+        <button type="submit" class="btn primary">Create</button>
+        <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+      </div>
+    </form>
+  </aside>
+
+  <script src="report.js" defer></script>
+</body>
+</html>
